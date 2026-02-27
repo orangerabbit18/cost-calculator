@@ -259,7 +259,7 @@
   <div class="card">
     <div class="card-cap">
       <span class="card-cap-title">Project Phases</span>
-      <div class="card-cap-subtotal"><span>Phases Subtotal</span><span id="phases-sub">$82,000</span></div>
+      <div class="card-cap-subtotal"><span>Phases Subtotal</span><span id="phases-sub">$8,000</span></div>
     </div>
 
     <!-- 01 Discover & Clarify -->
@@ -361,6 +361,15 @@
       </div>
     </div>
 
+  </div><!-- /phases card -->
+
+  <!-- ══ COST FACTORS CARD ════════════════════════════════════ -->
+  <div class="card">
+    <div class="card-cap">
+      <span class="card-cap-title">Design &amp; Dev at Scale &nbsp;·&nbsp; Critical Cost Factors</span>
+      <div class="card-cap-subtotal"><span>Factors Subtotal</span><span id="s5-sub">$0</span></div>
+    </div>
+
     <!-- 04 Design & Dev at Scale -->
     <div class="trow">
       <div class="trow-label"><span class="sec-num">04</span><span class="sec-name">Design &amp; Dev at Scale</span></div>
@@ -381,15 +390,6 @@
       </div>
       <div class="trow-amount"></div>
       <div class="trow-subtotal"><span class="subtotal-val" id="s4-sub">$58,500</span></div>
-    </div>
-
-  </div><!-- /phases card -->
-
-  <!-- ══ COST FACTORS CARD ════════════════════════════════════ -->
-  <div class="card">
-    <div class="card-cap">
-      <span class="card-cap-title">Critical Cost Factors &nbsp;·&nbsp; applied to D&amp;D at Scale subtotal</span>
-      <div class="card-cap-subtotal"><span>Factors Subtotal</span><span id="s5-sub">$0</span></div>
     </div>
 
     <!-- 5.1 Media -->
@@ -694,7 +694,7 @@ function calc() {
   $('s3-sub').textContent = money(sub3);
   $('s4-sub').textContent = money(sub4);
   $('s5-sub').textContent = money(sub5);
-  $('phases-sub').textContent = money(sub1 + sub2 + sub3 + sub4);
+  $('phases-sub').textContent = money(sub1 + sub2 + sub3);
 
   function setImpact(id, v) { const el=$(id); el.textContent=money(v); el.classList.toggle('zero',v===0); }
   setImpact('f1-val', fi1); setImpact('f2-val', fi2);
