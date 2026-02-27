@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jackrabbit LX — Project Investment Estimate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:      #FF5E17;
+      --orange-soft: #FF7639;
+      --dark:        #293133;
+      --gray:        #666361;
+      --light:       #F2F2F2;
+      --border:      #E4E1DE;
+      --green:       #47F2BB;
+      --white:       #ffffff;
+      --card-radius: 10px;
+      --row-h:       44px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #ECEAE7;
+      color: var(--dark);
+      min-height: 100vh;
+      font-size: 13px;
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────────── */
+    .site-header {
+      background: var(--dark);
+      height: 56px;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+    .header-logo img { height: 32px; display: block; object-fit: contain; }
+    .logo-fallback { display: none; font-size: 18px; font-weight: 900; color: var(--white); letter-spacing: -0.5px; }
+    .logo-fallback em { color: var(--orange); font-style: normal; }
+    .header-title { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.38); letter-spacing: 2.5px; text-transform: uppercase; }
+
+    /* ── PAGE ───────────────────────────────────────────────── */
+    .page-wrapper { max-width: 1060px; margin: 0 auto; padding: 24px 20px 60px; display: flex; flex-direction: column; gap: 12px; }
+
+    /* ── CARD ───────────────────────────────────────────────── */
+    .card { background: var(--white); border-radius: var(--card-radius); border: 1px solid rgba(41,49,51,0.07); box-shadow: 0 1px 3px rgba(41,49,51,0.05), 0 4px 16px rgba(41,49,51,0.05); overflow: hidden; }
+
+    .card-cap { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px 9px; background: var(--light); border-bottom: 1.5px solid var(--border); }
+    .card-cap-title { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 2.5px; color: var(--gray); }
+    .card-cap-subtotal { font-size: 12px; font-weight: 700; color: var(--dark); letter-spacing: -0.3px; }
+    .card-cap-subtotal span { font-size: 9px; font-weight: 600; color: #b5b2af; text-transform: uppercase; letter-spacing: 1.5px; margin-right: 6px; }
+
+    /* ── TABLE ROWS ─────────────────────────────────────────── */
+    .trow { display: grid; grid-template-columns: 220px 1fr 146px 116px; align-items: center; min-height: var(--row-h); border-bottom: 1px solid var(--border); padding: 0 20px; gap: 0; }
+    .trow:last-child { border-bottom: none; }
+
+    .trow-label { display: flex; align-items: center; gap: 9px; padding-right: 16px; }
+    .sec-num { flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--orange); color: white; font-size: 8.5px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .sec-name { font-size: 12px; font-weight: 700; color: var(--dark); white-space: nowrap; }
+
+    .trow-control { padding: 6px 12px 6px 0; display: flex; align-items: center; gap: 8px; }
+    .trow-amount  { padding: 6px 12px 6px 0; }
+    .trow-subtotal { padding: 0 0 0 12px; border-left: 1px solid var(--border); display: flex; align-items: center; justify-content: flex-end; min-height: var(--row-h); }
+    .subtotal-val { font-size: 15px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; }
+
+    /* ── SELECT ─────────────────────────────────────────────── */
+    select {
+      width: 100%; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500; color: var(--dark);
+      background: var(--light); border: 1.5px solid var(--border); border-radius: 6px; padding: 8px 32px 8px 11px;
+      -webkit-appearance: none; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6' viewBox='0 0 9 6'%3E%3Cpolyline points='0.5,0.5 4.5,5 8.5,0.5' fill='none' stroke='%23666361' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 11px center; cursor: pointer;
+      transition: border-color 0.12s, box-shadow 0.12s;
+    }
+    select:hover  { border-color: #c0bdb9; }
+    select:focus  { outline: none; border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255,94,23,0.12); }
+
+    /* ── AMOUNT INPUT ────────────────────────────────────────── */
+    .amt-wrap { display: flex; align-items: stretch; border: 1.5px solid var(--border); border-radius: 6px; overflow: hidden; transition: border-color 0.12s, box-shadow 0.12s; width: 100%; }
+    .amt-wrap:focus-within { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255,94,23,0.12); }
+    .amt-pfx { padding: 7px 6px 7px 10px; font-size: 12px; font-weight: 600; color: #aaa8a5; background: #f7f5f3; border-right: 1.5px solid var(--border); display: flex; align-items: center; user-select: none; }
+    .amt-input { flex: 1; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: var(--dark); background: var(--light); border: none; outline: none; padding: 7px 10px; text-align: right; min-width: 0; }
+    .amt-input.overridden { color: var(--orange); background: #fff8f5; }
+
+    /* ── STEPPER ────────────────────────────────────────────── */
+    .stepper { display: inline-flex; align-items: center; border: 1.5px solid var(--border); border-radius: 6px; background: var(--light); overflow: hidden; transition: border-color 0.12s, box-shadow 0.12s; }
+    .stepper:focus-within { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255,94,23,0.12); }
+    .step-btn { background: none; border: none; width: 30px; height: 32px; cursor: pointer; font-size: 17px; color: var(--gray); display: flex; align-items: center; justify-content: center; transition: color 0.1s, background 0.1s; flex-shrink: 0; }
+    .step-btn:hover  { color: var(--orange); background: rgba(255,94,23,0.08); }
+    .step-btn:active { background: rgba(255,94,23,0.16); }
+    .hours-input { font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 800; color: var(--dark); background: transparent; border: none; outline: none; width: 44px; text-align: center; -moz-appearance: textfield; appearance: textfield; }
+    .hours-input::-webkit-inner-spin-button, .hours-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+    .hrs-label { font-size: 11px; font-weight: 600; color: var(--gray); white-space: nowrap; }
+
+    .admin-group { display: none; align-items: center; gap: 8px; }
+    .admin-group.revealed { display: flex; }
+    .admin-label { font-size: 10px; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 1.5px; white-space: nowrap; }
+
+    /* ── FACTOR TABLE ────────────────────────────────────────── */
+    .ftrow { display: grid; grid-template-columns: 200px 1fr 58px 116px; align-items: center; min-height: 42px; border-bottom: 1px solid var(--border); padding: 0 20px; gap: 0; transition: background 0.1s; }
+    .ftrow:last-child { border-bottom: none; }
+    .ftrow:focus-within { background: #fdfcfb; }
+
+    .ftrow-label { display: flex; align-items: center; gap: 7px; padding-right: 14px; }
+    .f-num  { font-size: 9px; font-weight: 700; color: var(--orange); white-space: nowrap; flex-shrink: 0; }
+    .f-name { font-size: 11px; font-weight: 700; color: var(--dark); white-space: nowrap; }
+
+    .ftrow-control { padding: 5px 12px 5px 0; }
+    .ftrow-pct { padding: 0 10px 0 0; display: flex; align-items: center; justify-content: center; }
+    .pct-badge { font-size: 11px; font-weight: 700; color: var(--gray); background: var(--light); border: 1.5px solid var(--border); border-radius: 20px; padding: 2px 9px; white-space: nowrap; text-align: center; min-width: 42px; transition: background 0.15s, color 0.15s, border-color 0.15s; }
+    .pct-badge.active { background: var(--orange); color: white; border-color: var(--orange); }
+
+    .ftrow-impact { padding: 0 0 0 12px; border-left: 1px solid var(--border); display: flex; align-items: center; justify-content: flex-end; min-height: 42px; }
+    .impact-val { font-size: 13px; font-weight: 700; color: var(--dark); letter-spacing: -0.3px; }
+    .impact-val.zero { color: #ccc9c6; }
+
+    /* Comm note */
+    .f-comm-wrapper { border-bottom: 1px solid var(--border); padding: 0 20px 10px; }
+    .comm-note { display: flex; gap: 8px; padding: 8px 12px; background: rgba(71,242,187,0.08); border-left: 3px solid var(--green); border-radius: 0 5px 5px 0; }
+    .comm-note p { font-size: 10px; color: var(--gray); font-style: italic; line-height: 1.5; }
+
+    /* ── ADMIN OPTIONS PANEL ─────────────────────────────────── */
+    .admin-opts {
+      display: none;
+      background: #fdf9f6;
+      border-bottom: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      padding: 9px 20px 11px 17px;
+    }
+    .admin-opts.on { display: block; }
+
+    .admin-opts-label {
+      font-size: 8px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--orange);
+      margin-bottom: 7px;
+      opacity: 0.7;
+    }
+
+    .opt-rows { display: flex; flex-direction: column; gap: 4px; }
+
+    .opt-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 12px;
+    }
+    .opt-row-label {
+      font-size: 10.5px;
+      font-weight: 500;
+      color: var(--gray);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .opt-row-label.is-selected {
+      color: var(--dark);
+      font-weight: 700;
+    }
+    .opt-row-label.is-selected::before {
+      content: '▸ ';
+      color: var(--orange);
+      font-size: 9px;
+    }
+
+    .opt-val-wrap {
+      display: flex;
+      align-items: stretch;
+      border: 1.5px solid #d8d4d0;
+      border-radius: 5px;
+      overflow: hidden;
+      background: white;
+      transition: border-color 0.12s, box-shadow 0.12s;
+    }
+    .opt-val-wrap:focus-within {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 2px rgba(255,94,23,0.15);
+    }
+    .opt-sym {
+      padding: 4px 6px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #b0ada9;
+      background: #f0ecea;
+      display: flex;
+      align-items: center;
+      user-select: none;
+    }
+    .opt-sym.pfx { border-right: 1px solid #d8d4d0; }
+    .opt-sym.sfx { border-left:  1px solid #d8d4d0; }
+
+    .opt-val-input {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--orange);
+      background: white;
+      border: none;
+      outline: none;
+      padding: 4px 8px;
+      text-align: right;
+      width: 76px;
+    }
+    .opt-val-input.pct-input { width: 44px; }
+
+    /* ── TOTAL CARD ──────────────────────────────────────────── */
+    .total-card { background: var(--dark); border-radius: var(--card-radius); overflow: hidden; display: grid; grid-template-columns: 1fr auto; box-shadow: 0 8px 36px rgba(41,49,51,0.28); position: relative; }
+    .total-card::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--orange-soft)); }
+
+    .total-breakdown { padding: 20px 28px; border-right: 1px solid rgba(255,255,255,0.07); }
+    .total-bd-title { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.3); margin-bottom: 12px; }
+    .bd-rows { display: flex; flex-direction: column; gap: 1px; }
+    .bd-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; }
+    .bd-row + .bd-row { border-top: 1px solid rgba(255,255,255,0.05); }
+    .bd-label { font-size: 11px; color: rgba(255,255,255,0.38); font-weight: 500; }
+    .bd-val { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.62); letter-spacing: -0.3px; }
+
+    .total-main { padding: 24px 36px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 280px; text-align: center; position: relative; }
+    .total-main::after { content: ''; position: absolute; bottom: -30px; right: -30px; width: 140px; height: 140px; border-radius: 50%; border: 24px solid rgba(255,94,23,0.07); pointer-events: none; }
+    .total-eyebrow { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: rgba(255,255,255,0.3); margin-bottom: 8px; }
+    .total-amount { font-size: 56px; font-weight: 900; color: var(--white); letter-spacing: -2.5px; line-height: 1; display: inline-block; transition: transform 0.12s cubic-bezier(0.34,1.56,0.64,1); }
+    .total-amount.pulse { transform: scale(1.03); }
+    .total-note { font-size: 9.5px; color: rgba(255,255,255,0.2); margin-top: 10px; font-weight: 500; }
+
+    /* ── ADMIN PILL ──────────────────────────────────────────── */
+    .admin-pill { position: fixed; bottom: 20px; right: 20px; background: var(--orange); color: white; font-size: 8px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; padding: 6px 12px; border-radius: 20px; display: none; box-shadow: 0 4px 14px rgba(255,94,23,0.4); pointer-events: none; }
+    .admin-pill.on { display: block; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-logo">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAn4AAACdCAMAAAAdQYVXAAAAY1BMVEVMaXH/////////djn/djn/djn/djn/////////////djn/////////////////////djn/////////////////djn/djn/djn/djn/djn/djn/djn/////djn/djn/////djlbRL7bAAAAH3RSTlMA8BAQgEDAQMCA8DCgYNDg0CBQcJCgYCAwcOCwsJBQeZLayAAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAEZRJREFUeJztneeW4jAMhUMqoXcGhjLv/5R7aIkkSy4hgdlB99duiBPH/sZFluXoxUqyLL1ql2Wvfrfqg/V1Sr9nP0iz9WarSKg6VZJtDPBq5RstfVX7yrJsk6Z5LnFXaZBq6ata0VFs5Wza6zBQ1YaawHfROtHiVz2tRo3fRfsvLXzVs0rWTfn70SmI6nltj4OG/GkHrGpDp+9m/OkMRNWKktO6URt41AZQ1Y6+UrfJz9AgVQBVbSlLv0NbwcH6sh6sa3GqdrQ113q9KDxp+ava0jYL7or32hGr2lGzqchAbYGqp9VwGvyjthjVk0o2DY2AD+UKoKqZvnYNbC+G1joNVoUq2az3LbB3lc5BVCHKmvn9iRrstPhVXtrugk3NHtqrGVDl1OnYoMfde40Q1SFGZVXWyMDyfYpSrxtnyp9K1lcD9vLdhSk//H5yLXyVqCRwupEfT/f2zBO/HzUBqiw6Hb1GcbN8nZ7g3g5f66DuyFQ5tM0um3vJBCTP8zxN002WZdwAznfIqPip2lfmSd+PWv9U7cu37x3o1FfVurwbP+17Va0r8R35aeOnal3+5hpt/FRty58+bfxUbevLf4lYfQ5U7SrxXe64eBxo2ata1SbAO0b9DVStKgS+n2+lT9WetmkQfOproGpN253ndHeQr/UABlWL2m68/aF1k7mqPW2z3TEPcIfWyYbqWW2z7JSmxzyEO6VP9YySC3LfDZCD0hGfKlRJln63EdhA93WoAtVmWAONc68KkbctxVca10Xlq007HS6Ulr3KS0nQAoanZlr2Kg8laQcBXRQ/lZdOHbR8V2nxq1xKnoxcapFOPVQOnTrpd29S32aVXcfu4FPnZhWnze6xFJu0b2yB2mvxq4i2s2o1bNuymdmQHi+twkqu09zrpOCrw2HfTRrPRYWV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" alt="Jackrabbit LX"
+         onerror="this.style.display='none';document.querySelector('.logo-fallback').style.display='block'">
+    <div class="logo-fallback">Jackrabbit <em>LX</em></div>
+  </div>
+  <span class="header-title">Project Investment Estimate</span>
+</header>
+
+<main class="page-wrapper">
+
+  <!-- ══ PHASES CARD ══════════════════════════════════════════ -->
+  <div class="card">
+    <div class="card-cap">
+      <span class="card-cap-title">Project Phases</span>
+      <div class="card-cap-subtotal"><span>Phases Subtotal</span><span id="phases-sub">$82,000</span></div>
+    </div>
+
+    <!-- 01 Discover & Clarify -->
+    <div class="trow">
+      <div class="trow-label"><span class="sec-num">01</span><span class="sec-name">Discover &amp; Clarify</span></div>
+      <div class="trow-control">
+        <select id="s1-sel" onchange="onSelectChange('s1')">
+          <option value="15000">Existing learner data, defined learning model, LMS in place</option>
+          <option value="30000">Some learner data, partially defined model and LMS</option>
+          <option value="50000">No learner data, no defined model, no LMS</option>
+        </select>
+      </div>
+      <div class="trow-amount">
+        <div class="amt-wrap"><span class="amt-pfx">$</span><input type="text" id="s1-amt" class="amt-input" value="15,000" oninput="onAmountInput('s1')" onblur="blurAmount('s1')"></div>
+      </div>
+      <div class="trow-subtotal"><span class="subtotal-val" id="s1-sub">$15,000</span></div>
+    </div>
+    <div class="admin-opts" id="s1-opts">
+      <div class="admin-opts-label">Edit option defaults</div>
+      <div class="opt-rows">
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="s1-sel" data-idx="0">Existing learner data, defined learning model, LMS in place</span>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s1-sel" data-idx="0" data-type="dollar" value="15,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="s1-sel" data-idx="1">Some learner data, partially defined model and LMS</span>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s1-sel" data-idx="1" data-type="dollar" value="30,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="s1-sel" data-idx="2">No learner data, no defined model, no LMS</span>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s1-sel" data-idx="2" data-type="dollar" value="50,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 Prototype -->
+    <div class="trow">
+      <div class="trow-label"><span class="sec-num">02</span><span class="sec-name">Prototype</span></div>
+      <div class="trow-control">
+        <select id="s2-sel" onchange="onSelectChange('s2')">
+          <option value="5500">Low fidelity — slides or wireframes</option>
+          <option value="7500">High fidelity — mockup in LMS or Figma, placeholder media</option>
+          <option value="14000">Thin slice — functional build with media</option>
+        </select>
+      </div>
+      <div class="trow-amount">
+        <div class="amt-wrap"><span class="amt-pfx">$</span><input type="text" id="s2-amt" class="amt-input" value="5,500" oninput="onAmountInput('s2')" onblur="blurAmount('s2')"></div>
+      </div>
+      <div class="trow-subtotal"><span class="subtotal-val" id="s2-sub">$5,500</span></div>
+    </div>
+    <div class="admin-opts" id="s2-opts">
+      <div class="admin-opts-label">Edit option defaults</div>
+      <div class="opt-rows">
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="s2-sel" data-idx="0">Low fidelity — slides or wireframes</span>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s2-sel" data-idx="0" data-type="dollar" value="5,500" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="s2-sel" data-idx="1">High fidelity — mockup in LMS or Figma, placeholder media</span>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s2-sel" data-idx="1" data-type="dollar" value="7,500" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="s2-sel" data-idx="2">Thin slice — functional build with media</span>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s2-sel" data-idx="2" data-type="dollar" value="14,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 Playbook -->
+    <div class="trow">
+      <div class="trow-label"><span class="sec-num">03</span><span class="sec-name">Playbook</span></div>
+      <div class="trow-control">
+        <select id="s3-sel" onchange="onSelectChange('s3')">
+          <option value="3000">Scale project under $150K</option>
+          <option value="5000">Scale project over $150K</option>
+        </select>
+      </div>
+      <div class="trow-amount">
+        <div class="amt-wrap"><span class="amt-pfx">$</span><input type="text" id="s3-amt" class="amt-input" value="3,000" oninput="onAmountInput('s3')" onblur="blurAmount('s3')"></div>
+      </div>
+      <div class="trow-subtotal"><span class="subtotal-val" id="s3-sub">$3,000</span></div>
+    </div>
+    <div class="admin-opts" id="s3-opts">
+      <div class="admin-opts-label">Edit option defaults</div>
+      <div class="opt-rows">
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="s3-sel" data-idx="0">Scale project under $150K</span>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s3-sel" data-idx="0" data-type="dollar" value="3,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="s3-sel" data-idx="1">Scale project over $150K</span>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s3-sel" data-idx="1" data-type="dollar" value="5,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 Design & Dev at Scale -->
+    <div class="trow">
+      <div class="trow-label"><span class="sec-num">04</span><span class="sec-name">Design &amp; Dev at Scale</span></div>
+      <div class="trow-control">
+        <div class="stepper">
+          <button class="step-btn" type="button" onclick="stepHours(-1)">&#8722;</button>
+          <input type="number" id="hours-input" class="hours-input" value="9" min="0" oninput="calc()">
+          <button class="step-btn" type="button" onclick="stepHours(1)">&#43;</button>
+        </div>
+        <span class="hrs-label">hrs</span>
+        <div class="admin-group" id="admin-group">
+          <span class="admin-label">× $</span>
+          <div class="amt-wrap" style="width:110px">
+            <input type="text" id="base-cost-input" class="amt-input" value="6,500" oninput="calc()" onblur="blurBaseCost()" style="font-size:13px;padding:7px 8px;">
+          </div>
+          <span class="admin-label">/ hr</span>
+        </div>
+      </div>
+      <div class="trow-amount"></div>
+      <div class="trow-subtotal"><span class="subtotal-val" id="s4-sub">$58,500</span></div>
+    </div>
+
+  </div><!-- /phases card -->
+
+  <!-- ══ COST FACTORS CARD ════════════════════════════════════ -->
+  <div class="card">
+    <div class="card-cap">
+      <span class="card-cap-title">Critical Cost Factors &nbsp;·&nbsp; applied to D&amp;D at Scale subtotal</span>
+      <div class="card-cap-subtotal"><span>Factors Subtotal</span><span id="s5-sub">$0</span></div>
+    </div>
+
+    <!-- 5.1 Media -->
+    <div class="ftrow">
+      <div class="ftrow-label"><span class="f-num">5.1</span><span class="f-name">Media Production</span></div>
+      <div class="ftrow-control">
+        <select id="f1-sel" onchange="onFactorChange('f1')">
+          <option value="0">No media — text and graphics only</option>
+          <option value="10" selected>Simple — stock assets, light edits, AI-generated audio</option>
+          <option value="20">Moderate — Zoom video with production kit, custom images, professional VO</option>
+          <option value="35">Elevated — higher-end video, custom graphics, complex interactives</option>
+          <option value="70">Premium — studio video, custom visuals, immersive interactives</option>
+        </select>
+      </div>
+      <div class="ftrow-pct"><span class="pct-badge active" id="f1-badge">10%</span></div>
+      <div class="ftrow-impact"><span class="impact-val" id="f1-val">$5,850</span></div>
+    </div>
+    <div class="admin-opts" id="f1-opts">
+      <div class="admin-opts-label">Edit percentages</div>
+      <div class="opt-rows">
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f1-sel" data-idx="0">No media — text and graphics only</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f1-sel" data-idx="0" data-type="pct" value="0" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f1-sel" data-idx="1">Simple — stock assets, light edits, AI-generated audio</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f1-sel" data-idx="1" data-type="pct" value="10" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f1-sel" data-idx="2">Moderate — Zoom video with production kit, custom images, professional VO</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f1-sel" data-idx="2" data-type="pct" value="20" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f1-sel" data-idx="3">Elevated — higher-end video, custom graphics, complex interactives</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f1-sel" data-idx="3" data-type="pct" value="35" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f1-sel" data-idx="4">Premium — studio video, custom visuals, immersive interactives</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f1-sel" data-idx="4" data-type="pct" value="70" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5.2 Content -->
+    <div class="ftrow">
+      <div class="ftrow-label"><span class="f-num">5.2</span><span class="f-name">Content Development</span></div>
+      <div class="ftrow-control">
+        <select id="f2-sel" onchange="onFactorChange('f2')">
+          <option value="0">Client provides all content</option>
+          <option value="25">Collaborative writing with SMEs</option>
+          <option value="50">JLX writes from minimal source material</option>
+        </select>
+      </div>
+      <div class="ftrow-pct"><span class="pct-badge" id="f2-badge">0%</span></div>
+      <div class="ftrow-impact"><span class="impact-val zero" id="f2-val">$0</span></div>
+    </div>
+    <div class="admin-opts" id="f2-opts">
+      <div class="admin-opts-label">Edit percentages</div>
+      <div class="opt-rows">
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f2-sel" data-idx="0">Client provides all content</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f2-sel" data-idx="0" data-type="pct" value="0" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f2-sel" data-idx="1">Collaborative writing with SMEs</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f2-sel" data-idx="1" data-type="pct" value="25" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f2-sel" data-idx="2">JLX writes from minimal source material</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f2-sel" data-idx="2" data-type="pct" value="50" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5.3 Stakeholder Comms -->
+    <div class="ftrow">
+      <div class="ftrow-label"><span class="f-num">5.3</span><span class="f-name">Stakeholder Comms</span></div>
+      <div class="ftrow-control">
+        <select id="f3-sel" onchange="onFactorChange('f3')">
+          <option value="0">Dedicated sponsor and SMEs, consistent availability</option>
+          <option value="20">Partial availability, some schedule flexibility needed</option>
+          <option value="50">Multiple stakeholders, limited availability</option>
+          <option value="100">Significant coordination challenges expected</option>
+        </select>
+      </div>
+      <div class="ftrow-pct"><span class="pct-badge" id="f3-badge">0%</span></div>
+      <div class="ftrow-impact"><span class="impact-val zero" id="f3-val">$0</span></div>
+    </div>
+    <div class="admin-opts" id="f3-opts">
+      <div class="admin-opts-label">Edit percentages</div>
+      <div class="opt-rows">
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f3-sel" data-idx="0">Dedicated sponsor and SMEs, consistent availability</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f3-sel" data-idx="0" data-type="pct" value="0" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f3-sel" data-idx="1">Partial availability, some schedule flexibility needed</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f3-sel" data-idx="1" data-type="pct" value="20" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f3-sel" data-idx="2">Multiple stakeholders, limited availability</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f3-sel" data-idx="2" data-type="pct" value="50" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f3-sel" data-idx="3">Significant coordination challenges expected</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f3-sel" data-idx="3" data-type="pct" value="100" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="f-comm-wrapper">
+      <div class="comm-note">
+        <p>Proactive communication and stakeholder alignment are among the most effective ways to manage project costs.</p>
+      </div>
+    </div>
+
+    <!-- 5.4 Accessibility -->
+    <div class="ftrow">
+      <div class="ftrow-label"><span class="f-num">5.4</span><span class="f-name">Accessibility</span></div>
+      <div class="ftrow-control">
+        <select id="f4-sel" onchange="onFactorChange('f4')">
+          <option value="0">Standard — alt text, transcripts, heading structure</option>
+          <option value="15">Enhanced — subtitles, video descriptions, accessible interactives</option>
+          <option value="30">Full compliance — complete testing and remediation</option>
+        </select>
+      </div>
+      <div class="ftrow-pct"><span class="pct-badge" id="f4-badge">0%</span></div>
+      <div class="ftrow-impact"><span class="impact-val zero" id="f4-val">$0</span></div>
+    </div>
+    <div class="admin-opts" id="f4-opts">
+      <div class="admin-opts-label">Edit percentages</div>
+      <div class="opt-rows">
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f4-sel" data-idx="0">Standard — alt text, transcripts, heading structure</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f4-sel" data-idx="0" data-type="pct" value="0" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f4-sel" data-idx="1">Enhanced — subtitles, video descriptions, accessible interactives</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f4-sel" data-idx="1" data-type="pct" value="15" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f4-sel" data-idx="2">Full compliance — complete testing and remediation</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f4-sel" data-idx="2" data-type="pct" value="30" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /factors card -->
+
+  <!-- ══ TOTAL CARD ════════════════════════════════════════════ -->
+  <div class="total-card">
+    <div class="total-breakdown">
+      <div class="total-bd-title">Breakdown</div>
+      <div class="bd-rows">
+        <div class="bd-row"><span class="bd-label">Discover &amp; Clarify</span><span class="bd-val" id="bd1">$15,000</span></div>
+        <div class="bd-row"><span class="bd-label">Prototype</span><span class="bd-val" id="bd2">$5,500</span></div>
+        <div class="bd-row"><span class="bd-label">Playbook</span><span class="bd-val" id="bd3">$3,000</span></div>
+        <div class="bd-row"><span class="bd-label">Design &amp; Development at Scale</span><span class="bd-val" id="bd4">$58,500</span></div>
+        <div class="bd-row"><span class="bd-label">Critical Cost Factors</span><span class="bd-val" id="bd5">$5,850</span></div>
+      </div>
+    </div>
+    <div class="total-main">
+      <p class="total-eyebrow">Total Project Investment</p>
+      <div class="total-amount" id="total-val">$88,350</div>
+      <p class="total-note">Ballpark estimate — subject to final scoping</p>
+    </div>
+  </div>
+
+</main>
+
+<div class="admin-pill" id="admin-pill">Admin Mode</div>
+
+<script>
+// ── State ─────────────────────────────────────────────────────
+const S = {
+  s1: { val: 15000, dirty: false },
+  s2: { val: 5500,  dirty: false },
+  s3: { val: 3000,  dirty: false },
+  hours: 9,
+  baseCost: 6500,
+  adminOn: false,
+  f: { f1: 10, f2: 0, f3: 0, f4: 0 }
+};
+
+const $ = id => document.getElementById(id);
+const money = n => '$' + Math.round(n).toLocaleString('en-US');
+const strip  = s => parseFloat(String(s).replace(/[$,\s]/g, '')) || 0;
+
+// ── Select → amount ───────────────────────────────────────────
+function onSelectChange(sec) {
+  const v = parseInt($(sec + '-sel').value);
+  S[sec].val   = v;
+  S[sec].dirty = false;
+  const inp = $(sec + '-amt');
+  inp.value = v.toLocaleString('en-US');
+  inp.classList.remove('overridden');
+  refreshOptHighlights(sec + '-sel');
+  calc();
+}
+
+// ── Amount override ───────────────────────────────────────────
+function onAmountInput(sec) {
+  S[sec].val   = parseFloat($(sec + '-amt').value.replace(/[$,]/g, '')) || 0;
+  S[sec].dirty = true;
+  $(sec + '-amt').classList.add('overridden');
+  calc();
+}
+function blurAmount(sec) {
+  $(sec + '-amt').value = S[sec].val.toLocaleString('en-US');
+}
+
+// ── Hours stepper ─────────────────────────────────────────────
+function stepHours(d) {
+  const h = Math.max(0, ($('hours-input').valueAsNumber || 0) + d);
+  $('hours-input').value = h;
+  S.hours = h;
+  calc();
+}
+
+// ── Base cost ─────────────────────────────────────────────────
+function blurBaseCost() {
+  const v = strip($('base-cost-input').value);
+  S.baseCost = v || 6500;
+  $('base-cost-input').value = S.baseCost.toLocaleString('en-US');
+  calc();
+}
+
+// ── Factor ────────────────────────────────────────────────────
+function onFactorChange(f) {
+  const pct = parseInt($(f + '-sel').value);
+  S.f[f] = pct;
+  const badge = $(f + '-badge');
+  badge.textContent = pct + '%';
+  badge.classList.toggle('active', pct > 0);
+  refreshOptHighlights(f + '-sel');
+  calc();
+}
+
+// ── Admin: edit option defaults ───────────────────────────────
+function onOptInput(inp) {
+  const raw = inp.value.replace(/[$,%\s]/g, '');
+  const val = parseFloat(raw) || 0;
+  const sel  = $(inp.dataset.sel);
+  const idx  = parseInt(inp.dataset.idx);
+  sel.options[idx].value = val;
+  if (sel.selectedIndex === idx) applyOptChange(inp.dataset.sel, val, inp.dataset.type);
+}
+
+function blurOpt(inp) {
+  const raw = inp.value.replace(/[$,%\s,]/g, '');
+  const val = parseFloat(raw) || 0;
+  inp.value = inp.dataset.type === 'dollar' ? val.toLocaleString('en-US') : val;
+  const sel = $(inp.dataset.sel);
+  const idx = parseInt(inp.dataset.idx);
+  sel.options[idx].value = val;
+  if (sel.selectedIndex === idx) applyOptChange(inp.dataset.sel, val, inp.dataset.type);
+}
+
+function applyOptChange(selId, val, type) {
+  if (type === 'dollar') {
+    const sec = selId.replace('-sel', '');
+    S[sec].val = val;
+    if (!S[sec].dirty) $(sec + '-amt').value = val.toLocaleString('en-US');
+  } else {
+    const f = selId.replace('-sel', '');
+    S.f[f] = val;
+    $(f + '-badge').textContent = val + '%';
+    $(f + '-badge').classList.toggle('active', val > 0);
+  }
+  calc();
+}
+
+// ── Highlight selected option in admin panels ─────────────────
+function refreshOptHighlights(selId) {
+  const sel = $(selId);
+  document.querySelectorAll(`.opt-row-label[data-sel="${selId}"]`).forEach((el, i) => {
+    el.classList.toggle('is-selected', i === sel.selectedIndex);
+  });
+}
+
+function refreshAllHighlights() {
+  ['s1-sel','s2-sel','s3-sel','f1-sel','f2-sel','f3-sel','f4-sel'].forEach(refreshOptHighlights);
+}
+
+// ── Recalculate ───────────────────────────────────────────────
+function calc() {
+  S.hours = parseInt($('hours-input').value) || 0;
+  if (S.adminOn) {
+    const v = strip($('base-cost-input').value);
+    if (v > 0) S.baseCost = v;
+  }
+
+  const sub1 = S.s1.val, sub2 = S.s2.val, sub3 = S.s3.val;
+  const sub4 = S.hours * S.baseCost;
+  const fi1 = sub4 * S.f.f1 / 100, fi2 = sub4 * S.f.f2 / 100;
+  const fi3 = sub4 * S.f.f3 / 100, fi4 = sub4 * S.f.f4 / 100;
+  const sub5 = fi1 + fi2 + fi3 + fi4;
+  const total = sub1 + sub2 + sub3 + sub4 + sub5;
+
+  $('s1-sub').textContent = money(sub1);
+  $('s2-sub').textContent = money(sub2);
+  $('s3-sub').textContent = money(sub3);
+  $('s4-sub').textContent = money(sub4);
+  $('s5-sub').textContent = money(sub5);
+  $('phases-sub').textContent = money(sub1 + sub2 + sub3 + sub4);
+
+  function setImpact(id, v) { const el=$(id); el.textContent=money(v); el.classList.toggle('zero',v===0); }
+  setImpact('f1-val', fi1); setImpact('f2-val', fi2);
+  setImpact('f3-val', fi3); setImpact('f4-val', fi4);
+
+  $('bd1').textContent=money(sub1); $('bd2').textContent=money(sub2);
+  $('bd3').textContent=money(sub3); $('bd4').textContent=money(sub4);
+  $('bd5').textContent=money(sub5);
+
+  const el = $('total-val');
+  el.textContent = money(total);
+  el.classList.remove('pulse');
+  void el.offsetWidth;
+  el.classList.add('pulse');
+  setTimeout(() => el.classList.remove('pulse'), 180);
+}
+
+// ── Admin toggle: Ctrl+Shift+K ────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.shiftKey && (e.key === 'K' || e.key === 'k')) {
+    e.preventDefault();
+    S.adminOn = !S.adminOn;
+    $('admin-group').classList.toggle('revealed', S.adminOn);
+    $('admin-pill').classList.toggle('on', S.adminOn);
+    document.querySelectorAll('.admin-opts').forEach(el => el.classList.toggle('on', S.adminOn));
+    if (S.adminOn) {
+      $('base-cost-input').value = S.baseCost.toLocaleString('en-US');
+      refreshAllHighlights();
+    }
+    calc();
+  }
+});
+
+// ── Init ──────────────────────────────────────────────────────
+calc();
+</script>
+</body>
+</html>
