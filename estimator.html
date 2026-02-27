@@ -267,9 +267,9 @@
       <div class="trow-label"><span class="sec-num">01</span><span class="sec-name">Discover &amp; Clarify</span></div>
       <div class="trow-control">
         <select id="s1-sel" onchange="onSelectChange('s1')">
-          <option value="15000">Existing learner data, defined learning model, LMS in place</option>
-          <option value="30000">Some learner data, partially defined model and LMS</option>
-          <option value="50000">No learner data, no defined model, no LMS</option>
+          <option value="3000">Existing learner data, defined learning model, LMS in place</option>
+          <option value="5000">Some learner data, partially defined model and LMS</option>
+          <option value="12000">No learner data, no defined model, no LMS</option>
         </select>
       </div>
       <div class="trow-amount">
@@ -282,15 +282,15 @@
       <div class="opt-rows">
         <div class="opt-row">
           <span class="opt-row-label" data-sel="s1-sel" data-idx="0">Existing learner data, defined learning model, LMS in place</span>
-          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s1-sel" data-idx="0" data-type="dollar" value="15,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s1-sel" data-idx="0" data-type="dollar" value="3,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
         </div>
         <div class="opt-row">
           <span class="opt-row-label" data-sel="s1-sel" data-idx="1">Some learner data, partially defined model and LMS</span>
-          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s1-sel" data-idx="1" data-type="dollar" value="30,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s1-sel" data-idx="1" data-type="dollar" value="5,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
         </div>
         <div class="opt-row">
           <span class="opt-row-label" data-sel="s1-sel" data-idx="2">No learner data, no defined model, no LMS</span>
-          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s1-sel" data-idx="2" data-type="dollar" value="50,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s1-sel" data-idx="2" data-type="dollar" value="12,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
         </div>
       </div>
     </div>
@@ -300,9 +300,9 @@
       <div class="trow-label"><span class="sec-num">02</span><span class="sec-name">Prototype</span></div>
       <div class="trow-control">
         <select id="s2-sel" onchange="onSelectChange('s2')">
-          <option value="5500">Low fidelity — slides or wireframes</option>
-          <option value="7500">High fidelity — mockup in LMS or Figma, placeholder media</option>
-          <option value="14000">Thin slice — functional build with media</option>
+          <option value="2000">Low fidelity — slides or wireframes</option>
+          <option value="4500">High fidelity — mockup in LMS or Figma, placeholder media</option>
+          <option value="7500">Thin slice — functional build with media</option>
         </select>
       </div>
       <div class="trow-amount">
@@ -315,15 +315,15 @@
       <div class="opt-rows">
         <div class="opt-row">
           <span class="opt-row-label" data-sel="s2-sel" data-idx="0">Low fidelity — slides or wireframes</span>
-          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s2-sel" data-idx="0" data-type="dollar" value="5,500" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s2-sel" data-idx="0" data-type="dollar" value="2,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
         </div>
         <div class="opt-row">
           <span class="opt-row-label" data-sel="s2-sel" data-idx="1">High fidelity — mockup in LMS or Figma, placeholder media</span>
-          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s2-sel" data-idx="1" data-type="dollar" value="7,500" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s2-sel" data-idx="1" data-type="dollar" value="4,500" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
         </div>
         <div class="opt-row">
           <span class="opt-row-label" data-sel="s2-sel" data-idx="2">Thin slice — functional build with media</span>
-          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s2-sel" data-idx="2" data-type="dollar" value="14,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s2-sel" data-idx="2" data-type="dollar" value="7,500" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
         </div>
       </div>
     </div>
@@ -560,8 +560,8 @@
 <script>
 // ── State ─────────────────────────────────────────────────────
 const S = {
-  s1: { val: 15000, dirty: false },
-  s2: { val: 5500,  dirty: false },
+  s1: { val: 3000,  dirty: false },
+  s2: { val: 2000,  dirty: false },
   s3: { val: 3000,  dirty: false },
   hours: 9,
   baseCost: 6500,
