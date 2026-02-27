@@ -466,9 +466,40 @@
       </div>
     </div>
 
-    <!-- 5.3 Stakeholder Comms -->
+    <!-- 5.3 Accessibility -->
     <div class="ftrow">
-      <div class="ftrow-label"><span class="f-num">5.3</span><span class="f-name">Stakeholder Comms</span></div>
+      <div class="ftrow-label"><span class="f-num">5.3</span><span class="f-name">Accessibility</span></div>
+      <div class="ftrow-control">
+        <select id="f4-sel" onchange="onFactorChange('f4')">
+          <option value="0">Standard — alt text, transcripts, heading structure</option>
+          <option value="15">Enhanced — subtitles, video descriptions, accessible interactives</option>
+          <option value="30">Full compliance — complete testing and remediation</option>
+        </select>
+      </div>
+      <div class="ftrow-pct"><span class="pct-badge" id="f4-badge">0%</span></div>
+      <div class="ftrow-impact"><span class="impact-val zero" id="f4-val">$0</span></div>
+    </div>
+    <div class="admin-opts" id="f4-opts">
+      <div class="admin-opts-label">Edit percentages</div>
+      <div class="opt-rows">
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f4-sel" data-idx="0">Standard — alt text, transcripts, heading structure</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f4-sel" data-idx="0" data-type="pct" value="0" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f4-sel" data-idx="1">Enhanced — subtitles, video descriptions, accessible interactives</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f4-sel" data-idx="1" data-type="pct" value="15" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="f4-sel" data-idx="2">Full compliance — complete testing and remediation</span>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f4-sel" data-idx="2" data-type="pct" value="30" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5.4 Stakeholder Comms -->
+    <div class="ftrow">
+      <div class="ftrow-label"><span class="f-num">5.4</span><span class="f-name">Stakeholder Comms</span></div>
       <div class="ftrow-control">
         <select id="f3-sel" onchange="onFactorChange('f3')">
           <option value="0">Dedicated sponsor and SMEs, consistent availability</option>
@@ -505,37 +536,6 @@
     <div class="f-comm-wrapper">
       <div class="comm-note">
         <p>Proactive communication and stakeholder alignment are among the most effective ways to manage project costs.</p>
-      </div>
-    </div>
-
-    <!-- 5.4 Accessibility -->
-    <div class="ftrow">
-      <div class="ftrow-label"><span class="f-num">5.4</span><span class="f-name">Accessibility</span></div>
-      <div class="ftrow-control">
-        <select id="f4-sel" onchange="onFactorChange('f4')">
-          <option value="0">Standard — alt text, transcripts, heading structure</option>
-          <option value="15">Enhanced — subtitles, video descriptions, accessible interactives</option>
-          <option value="30">Full compliance — complete testing and remediation</option>
-        </select>
-      </div>
-      <div class="ftrow-pct"><span class="pct-badge" id="f4-badge">0%</span></div>
-      <div class="ftrow-impact"><span class="impact-val zero" id="f4-val">$0</span></div>
-    </div>
-    <div class="admin-opts" id="f4-opts">
-      <div class="admin-opts-label">Edit percentages</div>
-      <div class="opt-rows">
-        <div class="opt-row">
-          <span class="opt-row-label" data-sel="f4-sel" data-idx="0">Standard — alt text, transcripts, heading structure</span>
-          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f4-sel" data-idx="0" data-type="pct" value="0" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
-        </div>
-        <div class="opt-row">
-          <span class="opt-row-label" data-sel="f4-sel" data-idx="1">Enhanced — subtitles, video descriptions, accessible interactives</span>
-          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f4-sel" data-idx="1" data-type="pct" value="15" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
-        </div>
-        <div class="opt-row">
-          <span class="opt-row-label" data-sel="f4-sel" data-idx="2">Full compliance — complete testing and remediation</span>
-          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f4-sel" data-idx="2" data-type="pct" value="30" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
-        </div>
       </div>
     </div>
 
