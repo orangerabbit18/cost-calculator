@@ -366,17 +366,17 @@
   <!-- ══ COST FACTORS CARD ════════════════════════════════════ -->
   <div class="card">
     <div class="card-cap">
-      <span class="card-cap-title">Design &amp; Dev at Scale &nbsp;·&nbsp; Critical Cost Factors</span>
+      <span class="card-cap-title">Number of Course Hours &nbsp;·&nbsp; Critical Cost Factors</span>
       <div class="card-cap-subtotal"><span>Factors Subtotal</span><span id="s5-sub">$0</span></div>
     </div>
 
     <!-- 04 Design & Dev at Scale -->
     <div class="trow">
-      <div class="trow-label"><span class="sec-num">04</span><span class="sec-name">Design &amp; Dev at Scale</span></div>
+      <div class="trow-label"><span class="sec-num">04</span><span class="sec-name">Number of Course Hours</span></div>
       <div class="trow-control">
         <div class="stepper">
           <button class="step-btn" type="button" onclick="stepHours(-1)">&#8722;</button>
-          <input type="number" id="hours-input" class="hours-input" value="9" min="0" oninput="calc()">
+          <input type="number" id="hours-input" class="hours-input" value="0" min="0" oninput="calc()">
           <button class="step-btn" type="button" onclick="stepHours(1)">&#43;</button>
         </div>
         <span class="hrs-label">hrs</span>
@@ -547,7 +547,7 @@
         <div class="bd-row"><span class="bd-label">Discover &amp; Clarify</span><span class="bd-val" id="bd1">$15,000</span></div>
         <div class="bd-row"><span class="bd-label">Prototype</span><span class="bd-val" id="bd2">$5,500</span></div>
         <div class="bd-row"><span class="bd-label">Playbook</span><span class="bd-val" id="bd3">$3,000</span></div>
-        <div class="bd-row"><span class="bd-label">Design &amp; Development at Scale</span><span class="bd-val" id="bd4">$58,500</span></div>
+        <div class="bd-row"><span class="bd-label">Number of Course Hours</span><span class="bd-val" id="bd4">$58,500</span></div>
         <div class="bd-row"><span class="bd-label">Critical Cost Factors</span><span class="bd-val" id="bd5">$5,850</span></div>
       </div>
     </div>
@@ -568,7 +568,7 @@ const S = {
   s1: { val: 3000,  dirty: false },
   s2: { val: 2000,  dirty: false },
   s3: { val: 3000,  dirty: false },
-  hours: 9,
+  hours: 0,
   baseCost: 6500,
   adminOn: false,
   f: { f1: 10, f2: 0, f3: 0, f4: 0 }
