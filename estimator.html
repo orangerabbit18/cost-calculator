@@ -333,7 +333,8 @@
       <div class="trow-label"><span class="sec-num">03</span><span class="sec-name">Playbook</span></div>
       <div class="trow-control">
         <select id="s3-sel" onchange="onSelectChange('s3')">
-          <option value="3000">Scale project under $150K</option>
+          <option value="0">No Playbook — not required for this project</option>
+          <option value="3000" selected>Scale project under $150K</option>
           <option value="5000">Scale project over $150K</option>
         </select>
       </div>
@@ -346,12 +347,16 @@
       <div class="admin-opts-label">Edit option defaults</div>
       <div class="opt-rows">
         <div class="opt-row">
-          <span class="opt-row-label" data-sel="s3-sel" data-idx="0">Scale project under $150K</span>
-          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s3-sel" data-idx="0" data-type="dollar" value="3,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+          <span class="opt-row-label" data-sel="s3-sel" data-idx="0">No Playbook — not required for this project</span>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s3-sel" data-idx="0" data-type="dollar" value="0" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
         </div>
         <div class="opt-row">
-          <span class="opt-row-label" data-sel="s3-sel" data-idx="1">Scale project over $150K</span>
-          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s3-sel" data-idx="1" data-type="dollar" value="5,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+          <span class="opt-row-label" data-sel="s3-sel" data-idx="1">Scale project under $150K</span>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s3-sel" data-idx="1" data-type="dollar" value="3,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
+        </div>
+        <div class="opt-row">
+          <span class="opt-row-label" data-sel="s3-sel" data-idx="2">Scale project over $150K</span>
+          <div class="opt-val-wrap"><span class="opt-sym pfx">$</span><input class="opt-val-input" data-sel="s3-sel" data-idx="2" data-type="dollar" value="5,000" oninput="onOptInput(this)" onblur="blurOpt(this)"></div>
         </div>
       </div>
     </div>
