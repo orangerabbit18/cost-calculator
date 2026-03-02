@@ -502,12 +502,12 @@
       <div class="ftrow-label"><span class="f-num">4.2</span><span class="f-name">Stakeholder Comms</span></div>
       <div class="ftrow-control">
         <select id="f3-sel" onchange="onFactorChange('f3')">
-          <option value="30">Consistent availability — dedicated sponsor / SME</option>
+          <option value="0">Consistent availability — dedicated sponsor / SME</option>
           <option value="60">Partial availability / schedule flexibility needed</option>
           <option value="125">Significant coordination challenges expected</option>
         </select>
       </div>
-      <div class="ftrow-pct"><span class="pct-badge active" id="f3-badge">30%</span></div>
+      <div class="ftrow-pct"><span class="pct-badge" id="f3-badge">0%</span></div>
       <div class="ftrow-impact"><span class="impact-val zero" id="f3-val">$0</span></div>
     </div>
     <div class="admin-opts" id="f3-opts">
@@ -515,7 +515,7 @@
       <div class="opt-rows">
         <div class="opt-row">
           <span class="opt-row-label" data-sel="f3-sel" data-idx="0">Consistent availability — dedicated sponsor / SME</span>
-          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f3-sel" data-idx="0" data-type="pct" value="30" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
+          <div class="opt-val-wrap"><input class="opt-val-input pct-input" data-sel="f3-sel" data-idx="0" data-type="pct" value="0" oninput="onOptInput(this)" onblur="blurOpt(this)"><span class="opt-sym sfx">%</span></div>
         </div>
         <div class="opt-row">
           <span class="opt-row-label" data-sel="f3-sel" data-idx="1">Partial availability / schedule flexibility needed</span>
@@ -568,7 +568,7 @@ const S = {
   hours: 0,
   baseCost: 6500,
   adminOn: false,
-  f: { f1: 0, f2: 0, f3: 30, f4: 0 }
+  f: { f1: 0, f2: 0, f3: 0, f4: 0 }
 };
 
 const $ = id => document.getElementById(id);
